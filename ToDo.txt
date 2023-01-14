@@ -1,0 +1,63 @@
+
+1. url links for login and logout
+
+    urls.py
+
+    import py_compile
+    from .views import Authentication
+    from django.contrib.auth.views import LogoutView
+
+    import .settings
+
+        login
+        logout
+        register
+
+        path('login/', Authentication.login, name = 'login')
+        path('register/', Authentication.register, name = 'register_user')
+        path('logout/', LogoutView.as_view(next_page = settings.LOGOUT_REDIRECT_URL))
+
+
+        create the class Authentication in views.py
+
+            login()
+            register()
+            reset_password()
+
+        create the templates 
+
+
+include bootstrap in templates
+install
+    pip install bootstrap4
+    
+
+userProfile
+    when clicked will pass the userid to the calling method 
+        if profile is already updated 
+            form will open for editing/updating with existing data
+            else 
+            blank form will open for adding a profile
+
+
+
+------------------------------------
+
+to display custom messages on a html form
+    1. template
+        add the message to the area where its to be displayed
+
+    2. implement django.contrib.messages in the views.py
+        
+    
+
+
+    creating html forms
+
+
+
+1. CREATE THE CITY STATE MASTER FORM
+
+2. DONNER TRANSACTION FORM
+
+3. CAMPAIGN MASTER 

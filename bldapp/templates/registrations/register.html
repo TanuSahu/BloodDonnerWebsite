@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    {% load bootstrap4 %}
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+
+
+    <form method="POST" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-success">
+                Sign-On
+            </button>
+            <button type="reset" class="btn btn-success">
+                Reset
+            </button>
+        {% endbuttons %}
+    </form>
+
+{% endblock %}

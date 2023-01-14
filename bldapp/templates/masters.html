@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2 align="center"> Maintain Masters </h2>
+<form action="" method="POST">
+    {% csrf_token %}
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-sm-6 mb-4">
+                <a href="{% url 'citystate' %}" class="btn btn-primary btn-lg" role="button">
+                    City State <br />Master Entry
+                </a>
+            </div>
+            <div class="col-sm-6 mb-4">
+                <a href="{% url 'campaign' %}" class="btn btn-primary btn-lg" role="button">
+                    Campaign <br />Masters
+                </a>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

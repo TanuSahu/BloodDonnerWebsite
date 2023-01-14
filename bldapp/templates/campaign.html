@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2 align="center"> Create Campaign's </h2>
+
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="table-responsive m-b-40">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+
+                        {{ form.source.errors }}
+                        {{ form.source }}
+                        <table class="table table-borderless table-data3">
+                            <thead>
+                                <tr>
+                                    <th colspan="4">Campaigns</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for message in messages %}
+                                <tr>
+                                    <td colspan='2'>
+                                        <div id="msg" class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            {{ message }}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                <tr>
+                                    <td colspan="2">Campaign Name</td>
+                                    <td colspan="2">{{ form.campaignname }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Start Date</td>
+                                    <td>{{ form.sdate }}</td>
+                                    <td>Start Time</td>
+                                    <td>{{ form.stime }}</td>
+                                </tr>
+                                <tr>
+                                    <td>End Date</td>
+                                    <td>{{ form.edate }}</td>
+                                    <td>End Time</td>
+                                    <td>{{ form.etime }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Location Name</td>
+                                    <td>{{ form.location }}</td>
+                                    <td>City Name</td>
+                                    <td>{{ form.city }}</td>
+                                </tr>
+                                <tr align="center">
+                                    <td colspan="2">
+                                        <div class="d-flex justify-content-around">
+                                            <input type="submit" name="submit" value="Save" class="btn btn-outline-secondary text-center">
+                                            <input type="button" name="Cancel" value="Cancel" id="dis" class="btn btn-outline-secondary text-center" onclick="location.href='{% url 'donate' %}'">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <div>
+                    <div class="table-responsive m-b-40">
+                        <table class="table table-borderless table-data3">
+                            <thead>
+                                <tr>
+                                    <th nowrap="nowrap">Campaign</th>
+                                    <th nowrap="nowrap">St. Date</th>
+                                    <th nowrap="nowrap">St. Time</th>
+                                    <th nowrap="nowrap">Ed. Date</th>
+                                    <th nowrap="nowrap">Ed. Time</th>
+                                    <th nowrap="nowrap">Location</th>
+                                    <th nowrap="nowrap">City</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in data %}
+                                <tr>
+                                    <td nowrap="nowrap">{{ row.campaignname }}</td>
+                                    <td nowrap="nowrap">{{ row.sdate }}</td>
+                                    <td nowrap="nowrap">{{ row.stime }}</td>
+                                    <td nowrap="nowrap">{{ row.edate }}</td>
+                                    <td nowrap="nowrap">{{ row.etime }}</td>
+                                    <td nowrap="nowrap">{{ row.location }}</td>
+                                    <td nowrap="nowrap">{{ row.city }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+                $(document).ready(function () {
+                    // messages timeout for 10 sec
+                    setTimeout(function () {
+                        $('#msg').fadeOut('slow');
+                        $('.errorlist').fadeOut('slow');
+                    }, 4000);
+                });
+            </script>
+
+{% endblock %}

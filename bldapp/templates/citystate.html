@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2 align="center"> City State Masters </h2>
+
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="table-responsive m-b-40">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+
+                        {{ form.source.errors }}
+                        {{ form.source }}
+                        <table class="table table-borderless table-data3">
+                            <thead>
+                                <tr>
+                                    <th colspan="4">CIty State Masters</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for message in messages %}
+                                <tr>
+                                    <td colspan='2'>
+                                        <div id="msg" class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            {{ message }}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                <tr>
+                                    <td>State Code</td>
+                                    <td>{{ form.state_code }}</td>
+                                    <td>State Name</td>
+                                    <td>{{ form.state_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>City Name</td>
+                                    <td>{{ form.city_name }}</td>
+                                    <td>Zip Code</td>
+                                    <td>{{ form.zipcode }}</td>
+                                </tr>
+                                <tr align="center">
+                                    <td colspan="2">
+                                        <div class="d-flex justify-content-around">
+                                            <input type="submit" name="submit" value="Save" class="btn btn-outline-secondary text-center">
+                                            <input type="button" name="Cancel" value="Cancel" id="dis" class="btn btn-outline-secondary text-center" onclick="location.href='{% url 'donate' %}'">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <div>
+                    <div class="table-responsive m-b-40">
+                        <table class="table table-borderless table-data3">
+                            <thead>
+                                <tr>
+                                    <th nowrap="nowrap">State Code</th>
+                                    <th nowrap="nowrap">State Name</th>
+                                    <th nowrap="nowrap">City</th>
+                                    <th nowrap="nowrap">ZipCode</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in data %}
+                                <tr>
+                                    <td nowrap="nowrap">{{ row.state_code }}</td>
+                                    <td nowrap="nowrap">{{ row.state_name }}</td>
+                                    <td nowrap="nowrap">{{ row.city_name }}</td>
+                                    <td nowrap="nowrap">{{ row.zipcode }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+                $(document).ready(function () {
+                    // messages timeout for 10 sec
+                    setTimeout(function () {
+                        $('#msg').fadeOut('slow');
+                        $('.errorlist').fadeOut('slow');
+                    }, 4000);
+                });
+            </script>
+
+            {% endblock %}
